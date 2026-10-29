@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090811">
+  <title>顔面スイカ — 落として、重ねて、大坊主。</title>
+  <meta name="description" content="写真の顔だけを11段階に進化させる顔面合体パズル。sivaが降りたら声が聴こえる。坊主を2つ合体させて、ド派手な大坊主を降臨させよう。">
+  <meta property="og:title" content="顔面スイカ — 落として、重ねて、大坊主。">
+  <meta property="og:description" content="11段階の顔面進化。sivaの声、物理暴走、そして大坊主。世界中のスコアランキングに挑戦。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <div id="loader" class="loader" role="status" aria-live="polite">
+    <div class="loader-face">
+      <img src="assets/faces/face10.webp" alt="">
+      <span class="loader-ring"></span>
+    </div>
+    <p>顔面を読み込み中<span class="dots"><i></i><i></i><i></i></span></p>
+    <div class="loader-bar"><span id="loaderBar"></span></div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <button class="brand" id="brandHome" aria-label="トップへ戻る">
+      <span class="brand-mark">顔</span>
+      <span class="brand-text">顔面スイカ<em>FACE MERGE ARCADE</em></span>
+    </button>
+    <nav class="header-nav">
+      <button class="icon-btn" id="btnRankHeader" aria-label="ランキングを見る">
+        <span class="icon">🏆</span><span class="label">ランキング</span>
+      </button>
+      <button class="icon-btn sound-btn" data-sound-toggle aria-label="音をオン・オフ">
+        <span class="icon">🔊</span><span class="label">SOUND</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="screen-home" class="screen active" aria-label="ホーム">
+      <div class="home-wrap">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="pulse-dot"></span> FACE MERGE ARCADE / 11 STAGES</p>
+            <h1 class="hero-title">
+              <span class="line line-1">顔面</span>
+              <span class="line line-2">スイカ<small>。</small></span>
+            </h1>
+            <p class="tagline">落として、重ねて、<br><span class="grad-text">最後は大坊主。</span></p>
+            <p class="lead">写真の顔だけを11段階に進化させる、顔面合体パズル。sivaが降りたら、エコーする声を聴け。</p>
+
+            <form id="startForm" class="start-form" autocomplete="off">
+              <label for="playerName">プレイヤー名 <span>ランキングに表示されます</span></label>
+              <div class="name-row">
+                <input id="playerName" name="playerName" maxlength="12" placeholder="名無しの顔面" autocomplete="nickname" aria-describedby="nameHelp">
+                <button type="button" class="dice-btn" id="btnRandomName" aria-label="ランダムな名前を入れる">🎲</button>
+              </div>
+              <p id="nameHelp" class="field-help">12文字まで / あとから変更できます</p>
+              <button type="submit" class="primary-btn start-btn" id="btnStart">
+                <span class="btn-label">ゲームスタート</span>
+                <span class="btn-arrow">→</span>
+              </button>
+            </form>
+
+            <div class="hero-stats">
+              <div><strong>11</strong><span>進化段階</span></div>
+              <div><strong>4</strong><span>sivaボイス</span></div>
+              <div><strong id="heroBest">0</strong><span>自己ベスト</span></div>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="hero-main">
+              <img src="assets/faces/face10.webp" alt="">
+              <span class="hero-main-ring"></span>
+            </div>
+            <img class="float-face f1" src="assets/faces/face7.webp" alt="">
+            <img class="float-face f2" src="assets/faces/face8.webp" alt="">
+            <img class="float-face f3" src="assets/faces/face4.webp" alt="">
+            <img class="float-face f4" src="assets/faces/face5.webp" alt="">
+            <div class="hero-sticker">
+              <span>FINAL FORM</span>
+              <strong>大坊主</strong>
+              <em>2 × 坊主 → 降臨</em>
+            </div>
+            <div class="hero-siva-tag"><span>SIVA</span> VOICE ECHO</div>
+          </div>
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track">
+            <span>MERGE THE FACES</span><i>✦</i><span>siva APPEARS</span><i>✦</i><span>坊主 × 2</span><i>✦</i><span>大坊主 降臨</span><i>✦</i><span>GLOBAL RANKING</span><i>✦</i>
+            <span>MERGE THE FACES</span><i>✦</i><span>siva APPEARS</span><i>✦</i><span>坊主 × 2</span><i>✦</i><span>大坊主 降臨</span><i>✦</i><span>GLOBAL RANKING</span><i>✦</i>
+          </div>
+        </div>
+
+        <div class="home-columns">
+          <section class="panel ranking-home" aria-labelledby="rankHomeTitle">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">GLOBAL RANKING</p>
+                <h2 id="rankHomeTitle">スコアランキング</h2>
+              </div>
+              <button class="ghost-btn small" id="btnRefreshHome" aria-label="ランキングを更新">更新</button>
+            </div>
+            <ol id="rankHome" class="rank-list" aria-live="polite"></ol>
+            <div class="rank-foot">
+              <span id="rankHomeStatus" class="status-text">読み込み中…</span>
+              <button class="text-btn" id="btnRankHome">すべて見る <span>→</span></button>
+            </div>
+          </section>
+
+          <section class="panel howto" aria-labelledby="howtoTitle">
+            <p class="eyebrow">HOW TO PLAY</p>
+            <h2 id="howtoTitle">3ステップで顔面崩壊</h2>
+            <ol class="steps">
+              <li>
+                <span class="step-num">01</span>
+                <div><strong>狙って落とす</strong><p>指で場所を決めてタップ。マウスならクリック。左右キーとスペースでも遊べる。</p></div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div><strong>同じ顔を重ねる</strong><p>触れた瞬間に合体して、次の顔面へ。連続合体でコンボ倍率アップ。</p></div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div><strong>坊主を2つ合体</strong><p>赤いDANGER LINEを超えたままにするとゲームオーバー。大坊主を目指せ。</p></div>
+              </li>
+            </ol>
+            <div class="howto-note">
+              <strong>siva注意報</strong>
+              <p>終盤のsivaは台詞つき。siva・暴は物理演算が暴走して、周囲の顔面ごと吹き飛ばす。</p>
+            </div>
+          </section>
+        </div>
+
+        <section class="evolution" aria-labelledby="evoTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">EVOLUTION CHART</p>
+              <h2 id="evoTitle">顔面進化の序列</h2>
+            </div>
+            <p class="section-desc">同じ顔が触れると合体。sivaは終盤、その先に坊主と大坊主が待つ。<br>すべての顔面をコンプリートせよ。</p>
+          </div>
+          <div class="evolution-track" id="evolutionTrack"></div>
+          <div class="special-notes">
+            <div class="note note-siva"><span class="note-icon">7</span><div><strong>siva</strong><p>登場時に台詞がエコーでランダム再生。常に小刻みに震えている。</p></div></div>
+            <div class="note note-rage"><span class="note-icon">8</span><div><strong>siva・暴</strong><p>物理演算が暴走。周囲の顔面を巻き込んで爆発する。</p></div></div>
+            <div class="note note-monk"><span class="note-icon">10</span><div><strong>坊主 → 大坊主</strong><p>坊主が2つ合体すると、ド派手な演出とともに大坊主が降臨する。</p></div></div>
+          </div>
+        </section>
+
+        <footer class="site-footer">
+          <p>顔面スイカ / FACE MERGE ARCADE</p>
+          <p>写真の顔だけを切り抜いてつくった、非公式ファンメイドゲーム。</p>
+          <p class="footer-small">Sound: siva voices / Special thanks: すべての顔面</p>
+        </footer>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen" aria-label="ゲーム">
+      <div class="game-shell">
+        <header class="game-top">
+          <button class="round-btn" id="btnQuit" aria-label="ホームへ戻る">←</button>
+          <div class="score-block">
+            <span class="score-label">SCORE</span>
+            <strong id="scoreValue">0</strong>
+          </div>
+          <div class="game-best">
+            <span>BEST</span>
+            <strong id="bestValue">0</strong>
+          </div>
+          <div class="game-top-actions">
+            <button class="icon-btn compact" id="btnRankGameTop" aria-label="ランキング">
+              <span class="icon">🏆</span>
+            </button>
+            <button class="icon-btn compact sound-btn" data-sound-toggle aria-label="音をオン・オフ">
+              <span class="icon">🔊</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="game-grid">
+          <div class="board-column">
+            <div class="board-wrap" id="boardWrap">
+              <canvas id="gameCanvas" width="540" height="680" tabindex="0" aria-label="顔面スイカのゲーム盤面。左右キーで狙い、スペースで落とします。"></canvas>
+              <div class="event-banner" id="eventBanner" aria-live="assertive"></div>
+              <div class="combo-pop" id="comboPop" aria-live="polite">COMBO ×2</div>
+              <div class="drop-hint" id="dropHint">タップ / クリックで落とす</div>
+            </div>
+            <p class="board-caption"><span>← →</span> で移動 / <span>SPACE</span> でドロップ</p>
+          </div>
+
+          <aside class="side-panel">
+            <section class="panel next-panel" aria-labelledby="nextTitle">
+              <div class="panel-head tight">
+                <div><p class="eyebrow">UP NEXT</p><h2 id="nextTitle">NEXT</h2></div>
+                <span class="mini-label">同じ顔で合体</span>
+              </div>
+              <div id="nextQueue" class="next-queue"></div>
+              <div class="combo-meter">
+                <span>COMBO</span>
+                <div id="comboStack" class="combo-stack"><i></i><i></i><i></i><i></i><i></i></div>
+                <strong id="comboValue">×1</strong>
+              </div>
+            </section>
+
+            <section class="panel progress-panel" aria-labelledby="progressTitle">
+              <div class="panel-head tight">
+                <div><p class="eyebrow">EVOLUTION</p><h2 id="progressTitle">進化状況</h2></div>
+                <span class="stage-counter" id="stageCounter">0 / 10</span>
+              </div>
+              <div id="stageProgress" class="stage-progress" aria-hidden="true"></div>
+              <p class="stage-label" id="stageLabel">ピンクから始めよう</p>
+            </section>
+
+            <section class="panel rank-mini-panel" aria-labelledby="rankMiniTitle">
+              <div class="panel-head tight">
+                <div><p class="eyebrow">TOP PLAYERS</p><h2 id="rankMiniTitle">RANKING</h2></div>
+                <button class="text-btn tiny" id="btnRankGame">全部見る</button>
+              </div>
+              <ol id="rankMini" class="rank-list mini"></ol>
+            </section>
+
+            <button class="share-btn" id="btnShareGame"><span>↗</span> リンクをシェア</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modalRanking" role="dialog" aria-modal="true" aria-labelledby="rankModalTitle" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="ranking"></div>
+    <div class="modal-card modal-card-wide">
+      <header class="modal-head">
+        <div><p class="eyebrow">GLOBAL RANKING</p><h2 id="rankModalTitle">顔面スコアランキング</h2></div>
+        <button class="round-btn" data-close-modal="ranking" aria-label="閉じる">✕</button>
+      </header>
+      <div class="rank-table-header"><span>順位</span><span>プレイヤー</span><span>到達</span><span>スコア</span></div>
+      <ol id="rankFull" class="rank-list full" aria-live="polite"></ol>
+      <footer class="modal-foot">
+        <span id="rankFullStatus" class="status-text"></span>
+        <div class="modal-foot-actions">
+          <button class="ghost-btn small" id="btnRefreshFull">更新</button>
+          <button class="share-btn small" id="btnShareRank"><span>↗</span> シェア</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="modalGameover" role="dialog" aria-modal="true" aria-labelledby="goTitle" aria-hidden="true">
+    <div class="modal-card gameover-card">
+      <div class="go-burst" aria-hidden="true"></div>
+      <p class="eyebrow">FINAL SCORE</p>
+      <div class="go-stamp" aria-hidden="true">FACE BREAK</div>
+      <h2 id="goTitle">顔面崩壊<span>。</span></h2>
+      <div class="final-score" id="finalScore">0</div>
+      <p class="new-best" id="newBest" hidden>★ NEW BEST ★</p>
+      <div class="result-grid">
+        <div><span>到達</span><strong id="resultStage">ピンク</strong></div>
+        <div><span>合体</span><strong id="resultMerges">0</strong></div>
+        <div><span>順位</span><strong id="resultRank">—</strong></div>
+      </div>
+      <div class="go-submit">
+        <div class="go-form-grid">
+          <div class="go-field">
+            <label for="goName">ランキング名</label>
+            <input id="goName" maxlength="12" autocomplete="nickname" placeholder="名無しの顔面">
+          </div>
+          <div class="go-field">
+            <label for="goComment">ひとことコメント（任意）</label>
+            <input id="goComment" maxlength="30" placeholder="例: 大坊主成仏！ / siva暴走で散った">
+          </div>
+        </div>
+        <div class="go-btn-row">
+          <button class="primary-btn small" id="btnSubmitScore">名前とコメントを更新</button>
+        </div>
+        <p id="submitStatus" class="status-text" aria-live="polite"></p>
+      </div>
+      <ol id="rankAfter" class="rank-list mini gameover-rank"></ol>
+      <div class="go-actions">
+        <button class="primary-btn" id="btnRetry">もう一回 <span>→</span></button>
+        <button class="ghost-btn" id="btnHomeFromGo">トップへ</button>
+        <button class="share-btn small" id="btnShareScore"><span>↗</span> シェア</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="vendor/matter.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
